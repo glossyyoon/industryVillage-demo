@@ -10,7 +10,7 @@ function WebcamComponent() {
             <Webcam
             // height={800}
             width={1150}
-            mirrored={true}
+            mirrored={false}
             />
         {/* {   
             isShowVideo &&
