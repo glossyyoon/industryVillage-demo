@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-input[type='number'] {
+/* input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
@@ -15,4 +15,63 @@ input[type='number']::-webkit-inner-spin-button {
 input[type='number']::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+} */
+
+.mt-10 {
+  margin-top: 5vh;
+}
+
+.mt-20 {
+  margin-top: 15vh;
+}
+
+.text-score {
+  margin-top: 5vh;
+  font-weight:700;
+  font-size: xx-large;
+  /* color:whitesmoke; */
+}
+
+.text-instruction {
+  margin-top: 14vh;
+  font-weight:700;
+  font-size: xx-large;
+  /* color:whitesmoke; */
+}
+
+.text-item-list {
+  margin-top: 14vh;
+  font-weight: 700;
+  font-size: xx-large;
+  /* color:whitesmoke; */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  /* gap: 100px;
+  height: 100%;
+  width: 100%; */
+}
+.item-container {
+  /* padding: 10px; */
+  /* flex-direction: row; 컴포넌트를 수평 방향으로 배열 */
+  /* align-items: center; 컴포넌트를 수직 방향에서 가운데 정렬 */
+  /* margin-top: 20vh; */
+  height: 100%;
+  width: 100%;
+  
+}
+
+.item {
+  font-weight:500;
+  font-size: x-large;
+  margin-left: 30px;
+}
+
+.checkbox {
+  font-weight:500;
+  font-size: x-large;
+  /* color:whitesmoke; */
 }
