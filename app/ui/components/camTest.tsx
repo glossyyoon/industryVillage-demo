@@ -1,12 +1,20 @@
 import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import * as AWS from 'aws-sdk';
 import ReactS3Client from 'react-aws-s3-typescript';
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand, S3Client, ListBucketsCommand } from "@aws-sdk/client-s3";
+import { NextRequest, NextResponse } from 'next/server';
 
-const client = new S3Client({
+const s3 = new S3Client({
+  region: "ap-northeast-2",
+  credentials: {
+    // accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
+    // secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
+    accessKeyId: "",
+    secretAccessKey: ""
+  }
 });
 
-const InterviewCamera: React.FC = () => {
+const WebCam: React.FC = () => {
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [recording, setRecording] = useState(false);
   const [recordedBlobs, setRecordedBlobs] = useState<Blob[]>([]);
@@ -95,22 +103,17 @@ const InterviewCamera: React.FC = () => {
       Body: blob,
       ContentType: 'video/mp4'
     });
-  
-    try {
-      const response = async() => client.send(command);
-      console.log(response);
-      console.log('확인');
-      console.log(command);
-    } catch (err) {
-      console.error(err+`S3 upload error`);
-    }
 
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => {
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-    }, 100);
+    s3.send(command);
+    console.log(s3.send(command));
+
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+      }, 100);
+  
   };
 
   const getSupportedMimeTypes = () => {
@@ -138,9 +141,11 @@ const InterviewCamera: React.FC = () => {
         <button onClick={handleStartRecording} disabled={recording}>
           시작
         </button>
+        <br></br>
         <button onClick={handleStopRecording} disabled={!recording}>
           종료
         </button>
+        <br></br>
         <button
           onClick={handleDownload}
           disabled={recording || recordedBlobs.length === 0}
@@ -152,4 +157,4 @@ const InterviewCamera: React.FC = () => {
   );
 };
 
-export default InterviewCamera;
+export default WebCam;
